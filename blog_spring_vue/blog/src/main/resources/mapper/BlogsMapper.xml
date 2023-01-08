@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.mapper.BlogsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blog.entity.Blogs">
+        <id column="blog_id" property="blogId" />
+        <result column="title" property="title" />
+        <result column="content" property="content" />
+        <result column="author" property="author" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        blog_id, title, content, author, create_time, update_time
+    </sql>
+
+    <select id="getBlogs" resultType="java.util.HashMap">
+        SELECT b.blog_id, b.title, b.content, b.author, b.create_time, update_time, GROUP_CONCAT(t.tag SEPARATOR ',') AS tags, color
+        FROM blogs AS b, tags AS t, tag_blog AS t_b
+        WHERE b.blog_id = t_b.blog_id AND t.tag_id = t_b.tag_id AND t.tag LIKE #{searchTag} AND b.title LIKE #{searchTitle}
+        GROUP BY b.blog_id
+        LIMIT #{pageNum}, #{pageSize};
+    </select>
+
+</mapper>

@@ -1,0 +1,147 @@
+.body {
+    display: flex;
+    display: -webkit-flex;
+    background-color: #fff;
+    width: 70%;
+    height: 100vh;
+    margin: 20px auto;
+    box-shadow: 0 2px 10px 0 rgb(0 0 0 / 10%);
+}
+
+.body .userinfo {
+    width: 20%;
+    min-width: 300px;
+    /*background-color: #001F61;*/
+    display: flex;
+    flex-direction: column;
+}
+
+.body .userinfo .logo {
+    width: 220px;
+    height: 220px;
+    margin: 20px auto;
+}
+
+.body .userinfo .logo img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 2px 10px 0 rgb(0 0 0 / 10%);
+}
+
+.body .userinfo .category {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 15px;
+    font-weight: 700;
+}
+
+.body .userinfo .category .category-title {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.body .userinfo .category .category-title span {
+    font-weight: 700;
+    color: rgba(0, 0, 0, .3);
+}
+
+ul {
+    list-style: none;
+}
+
+.body .userinfo .btn-list {
+    margin: 10px 50px;
+    text-align: center;
+}
+
+.body .userinfo .btn-list button {
+    margin-top: 10px;
+    height: 50px;
+    width: 90%;
+    border-radius: 15px;
+    border: none;
+    padding: 10px;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /*color: rgb(0 0 0 /30%);*/
+}
+
+.el-button:hover,
+.el-button:active,
+.el-button:focus {
+    background-color: rgb(255 97 120 /100%);
+    box-shadow: 0 2px 10px 0 rgb(255 97 120 /60%);
+    color: #fff;
+}
+
+.search {
+    overflow: hidden;
+    border-radius: 15px;
+    height: 60px;
+    margin: 10px 50px;
+    box-shadow: 0 2px 10px 0 rgb(0 0 0 / 10%);
+}
+
+.search input {
+    height: 100%;
+    width: 100%;
+    border-style: none;
+    outline: none;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.other-link {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin: 10px 50px;
+    box-shadow: 0 2px 10px 0 rgb(0 0 0 / 10%);
+    justify-content: space-around;
+}
+
+.other-link .link-box {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px 0 rgb(0 0 0 / 10%);
+    background-color: rgb(123 213 324 /30%);
+    padding: 10px;
+    text-align: center;
+    line-height: 35px;
+}
+
+.other-link .link-box img {
+    height: 20px;
+    width: 20px;
+}
+
+.tags {
+    min-height: 35px;
+    margin: 10px 50px;
+    padding: 5%;
+    border-radius: 10%;
+    box-shadow: 0 2px 10px 0 rgb(0 0 0 / 10%);
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing:border-box;
+}
+
+.tags .tag {
+    margin: 2% 2% 0 0;
+    flex: 0 0 23.5%;
+}
+
+/* 手机端自适应 */
+@media screen and (max-width: 960px){
+    .body {
+        width: 90%;
+    }
+    .body .userinfo {
+        display: none;
+    }
+}

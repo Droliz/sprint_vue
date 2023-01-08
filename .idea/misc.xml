@@ -5,6 +5,8 @@
       <list>
         <option value="$PROJECT_DIR$/qtw/pom.xml" />
         <option value="$PROJECT_DIR$/sprint_vue2_1/qtw/pom.xml" />
+        <option value="$PROJECT_DIR$/blog_spring_vue/blog/pom.xml" />
+        <option value="$PROJECT_DIR$/spring_vue2_1/qtw/pom.xml" />
       </list>
     </option>
   </component>

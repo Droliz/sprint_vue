@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/sprint_vue2_1/qtw/qtw.iml" filepath="$PROJECT_DIR$/sprint_vue2_1/qtw/qtw.iml" />
+      <module fileurl="file://$PROJECT_DIR$/blog_spring_vue/blog/blog.iml" filepath="$PROJECT_DIR$/blog_spring_vue/blog/blog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring_vue2_1/qtw/qtw.iml" filepath="$PROJECT_DIR$/spring_vue2_1/qtw/qtw.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-demo/spring-demo.iml" filepath="$PROJECT_DIR$/spring-demo/spring-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/sprint_vue.iml" filepath="$PROJECT_DIR$/.idea/sprint_vue.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
     </modules>
   </component>
 </project>
