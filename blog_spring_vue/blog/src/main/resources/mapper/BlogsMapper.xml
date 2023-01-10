@@ -25,4 +25,18 @@
         LIMIT #{pageNum}, #{pageSize};
     </select>
 
+    <select id="getBlogById" resultType="java.util.HashMap">
+        SELECT b.blog_id, b.title, b.content, b.author, b.create_time, update_time, GROUP_CONCAT(t.tag SEPARATOR ',') AS tags, color
+        FROM blogs AS b, tags AS t, tag_blog AS t_b
+        WHERE b.blog_id = t_b.blog_id AND t.tag_id = t_b.tag_id AND b.blog_id = #{id}
+        GROUP BY b.blog_id
+    </select>
+
+    <select id="getBlogsTime" resultType="java.util.HashMap">
+        SELECT b.blog_id, b.title, b.content, b.author, DATE_FORMAT(b.create_time, #{format}) AS create_time, update_time, GROUP_CONCAT(t.tag SEPARATOR ',') AS tags, color
+        FROM blogs AS b, tags AS t, tag_blog AS t_b
+        WHERE b.blog_id = t_b.blog_id AND t.tag_id = t_b.tag_id
+        GROUP BY b.create_time;
+    </select>
+
 </mapper>

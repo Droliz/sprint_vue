@@ -5,14 +5,12 @@ import com.blog.common.Parma;
 import com.blog.common.QueryPageParma;
 import com.blog.common.Result;
 import com.blog.service.BlogsService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -34,21 +32,50 @@ public class BlogsController {
         return (long) blogsService.list().size();
     }
 
-    // 获取博客信息（多表查询）
+    // 获取所有博客信息（多表查询）
     @PostMapping("/getBlogs")
     public Result getBlogs(@RequestBody QueryPageParma query) {
 
-        System.out.println(query);
         Parma parma = query.getParma();
         if (parma == null) {
             parma = new Parma();
         }
-
+        if (Objects.equals(parma.getTitle(), "")) {
+            parma.setTitle("%");
+        } else {
+            parma.setTitle("%" + parma.getTitle() + "%");
+        }
+        if (Objects.equals(parma.getTag(), "")) {
+            parma.setTag("%");
+        }
+        System.out.println(parma);
         List<Map> res = blogsService.getBlogs(
                 parma.getTitle(),
                 parma.getTag(),
                 query.getPageSize(),
                 (query.getPageNum()-1) * query.getPageSize());
+
+        return Result.success(res, getBlogCount(), (long) res.size());
+    }
+
+    // 根据 ID 获取文章详情
+    @GetMapping("getBlogById")
+    public Result getBlogById(@RequestParam int id) {
+
+        List<Map> res = blogsService.getBlogById(id);
+
+        if (res.size() == 0) {
+            return Result.fail("没有找到该博客，请联系管理员");
+        }
+
+        return Result.success(res, getBlogCount(), 1L);
+    }
+
+    // 获取所有列表 按时间分
+    @GetMapping("getBlogsTime")
+    public Result getBlogsTime(@RequestParam String format) {
+
+        List<Map> res = blogsService.getBlogsTime(format);
 
         return Result.success(res, getBlogCount(), (long) res.size());
     }

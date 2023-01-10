@@ -28,4 +28,14 @@ public class BlogsServiceImpl extends ServiceImpl<BlogsMapper, Blogs> implements
     public List<Map> getBlogs(String title, String tag, int pageSize, int pageNum) {
         return blogsMapper.getBlogs(title, tag, pageSize, pageNum);
     }
+
+    @Override
+    public List<Map> getBlogById(int id) {
+        return blogsMapper.getBlogById(id);
+    }
+
+    @Override
+    public List<Map> getBlogsTime(String format) {
+        return blogsMapper.getBlogsTime(format);
+    }
 }

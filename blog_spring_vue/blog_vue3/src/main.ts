@@ -1,8 +1,17 @@
 import { createApp } from 'vue'
-// import './style.css'
+import './style.css'
 import App from './App.vue'
 import router from '@/router/index'
+import registerDirectives from "@/utils/directives";
+import './assets/css/markdown/custom_light_01.css'
+import VueLazyLoad from 'vue-lazyload';   // 图片懒加载
 
-createApp(App)
-    .use(router)
+const app = createApp(App)
+
+// 全局指令
+registerDirectives(app)
+
+app.use(router)
+    .use(VueLazyLoad)
     .mount('#app')
+

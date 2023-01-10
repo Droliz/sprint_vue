@@ -3,7 +3,7 @@
     display: -webkit-flex;
     background-color: #fff;
     width: 70%;
-    height: 100vh;
+    min-height: 100vh;
     margin: 20px auto;
     box-shadow: 0 2px 10px 0 rgb(0 0 0 / 10%);
 }
@@ -11,6 +11,7 @@
 .body .userinfo {
     width: 20%;
     min-width: 300px;
+    min-height: 1px;
     /*background-color: #001F61;*/
     display: flex;
     flex-direction: column;
@@ -78,22 +79,32 @@ ul {
     color: #fff;
 }
 
-.search {
-    overflow: hidden;
-    border-radius: 15px;
-    height: 60px;
-    margin: 10px 50px;
-    box-shadow: 0 2px 10px 0 rgb(0 0 0 / 10%);
+
+/* 小恐龙动画 */
+.little_dinosaur {
+    height: 134px;
+    width: 133px;
+    margin: 0 auto;
+    background-image: url("../../src/assets/img/little_dinosaur.png");
+    animation: run 300ms steps(6) infinite;
+}
+@keyframes run {
+    from {
+        background-position: 0, 0;
+    }
+    to {
+        background-position: -800px, 0;
+    }
 }
 
-.search input {
-    height: 100%;
-    width: 100%;
-    border-style: none;
-    outline: none;
-    font-size: 20px;
-    margin-left: 10px;
-}
+/*.search input {*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*    border-style: none;*/
+/*    outline: none;*/
+/*    font-size: 20px;*/
+/*    margin-left: 10px;*/
+/*}*/
 
 .other-link {
     display: flex;
@@ -134,6 +145,12 @@ ul {
 .tags .tag {
     margin: 2% 2% 0 0;
     flex: 0 0 23.5%;
+}
+
+.context {
+    max-width: 100%;
+    flex: 1;
+    min-width: 1px;
 }
 
 /* 手机端自适应 */

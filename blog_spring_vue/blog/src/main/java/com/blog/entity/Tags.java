@@ -1,6 +1,7 @@
 package com.blog.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -25,7 +26,7 @@ public class Tags implements Serializable {
 
     @ApiModelProperty(value = "主键")
     @TableId(value = "tag_id", type = IdType.AUTO)
-    private Integer tag_id;
+    private Integer tagId;
 
     @ApiModelProperty(value = "标签")
     private String tag;

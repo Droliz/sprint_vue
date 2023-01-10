@@ -27,7 +27,7 @@ public class TagsController {
 
     // 删除
     @GetMapping("/getTags")
-    public Result func() {
+    public Result getTags() {
         return Result.success(tagsService.list());
     }
 }

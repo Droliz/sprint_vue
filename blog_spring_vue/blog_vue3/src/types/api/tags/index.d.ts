@@ -1,6 +1,6 @@
 
 interface tagInfo {
-    tag_id: number,
+    tagId: number,
     tag: string,
     color: string
 }

@@ -24,7 +24,7 @@
             </el-button>
           </li>
           <li>
-            <el-button @click="handleClickBtn">
+            <el-button @click="blogByTime">
               <template #icon>
                 <i-ep-notebook />
               </template>
@@ -40,7 +40,7 @@
             </el-button>
           </li>
           <li>
-            <el-button @click="handleClickBtn">
+            <el-button @click="drinkTea">
               <template #icon>
                 <i-ep-coffeeCup />
               </template>
@@ -57,8 +57,8 @@
           </li>
         </ul>
       </div>
-      <div class="search">
-        <input type="text" placeholder="搜索"/>
+      <div class="little_dinosaur">
+<!--        <input type="text" placeholder="搜索"/>-->
       </div>
       <div class="other-link">
         TODO 外链
@@ -66,7 +66,7 @@
       <div class="tags">
         <div
             v-for="tagInfo in tags"
-            :key="tagInfo.tag_id"
+            :key="tagInfo.tagId"
             class="tag">
           <el-tag :color="tagInfo.color"
                   :style="{color: '#fff', fontWeight: 700}">
@@ -81,6 +81,8 @@
       <router-view/>
     </div>
   </div>
+
+  <el-backtop/>
 </template>
 
 <script setup lang="ts">
@@ -89,7 +91,6 @@ import { getTags } from '@/api/tags'
 import {useRouter} from "vue-router";
 
 const input = ref("")
-const isVal = ref(false)
 
 interface Title {
   text: string,
@@ -125,6 +126,24 @@ const blogList = (): void => {
   router.push({
     name: "blogList"
   })
+}
+
+// 喝茶界面
+const drinkTea = (): void => {
+  router.push({
+    name: 'drinkTea'
+  })
+}
+
+// 文章归档
+const blogByTime = (): void => {
+  router.push({
+    name: 'blogByTime'
+  })
+}
+
+const handleClickBtn = () => {
+
 }
 
 </script>

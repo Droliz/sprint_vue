@@ -18,4 +18,8 @@ import java.util.Map;
 public interface BlogsService extends IService<Blogs> {
 
     List<Map> getBlogs(String title, String tag, int pageSize, int pageNum);
+
+    List<Map> getBlogById(int id);
+
+    List<Map> getBlogsTime(String format);
 }
