@@ -22,42 +22,11 @@
 
   <div class="context-body">
     <!-- 主体 -->
-    <blog-card v-for="blog in blogList" :key="blog.blog_id" :blog="blog" :tag-color-map="tagColorMap"/>
-<!--    <el-card-->
-<!--        @click="blogPage(blog.blog_id)"-->
-<!--        shadow="hover"-->
-<!--        class="box-card"-->
-<!--        :key="blog.blog_id"-->
-<!--        v-for="blog in blogList">-->
-<!--      <template #header>-->
-<!--        <div class="card-header">-->
-<!--          <span class="header-title">{{ blog.title }}</span>-->
-<!--          <el-tag-->
-<!--              size="small"-->
-<!--              class="header-tag"-->
-<!--              v-for="tag in blog.tags"-->
-<!--              :color="tagColorMap[1][tagColorMap[0].findIndex(i => i===tag)]"-->
-<!--              :style="{color: '#fff', fontWeight: 700}">-->
-<!--            {{ tag }}-->
-<!--          </el-tag>-->
-<!--        </div>-->
-<!--      </template>-->
-<!--      <div class="card-body">-->
-<!--        <div class="card-body-img">-->
-
-<!--        </div>-->
-<!--        <div class="card-body-content">-->
-<!--          <span>{{ blog.content.slice(0, 200) }}</span>-->
-<!--          <div class="info">-->
-<!--            <span>作者：{{ blog.author }}</span>-->
-<!--            <span>点赞</span>-->
-<!--            <span>踩</span>-->
-<!--            <span>更新时间：{{ blog.update_time }}</span>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </el-card>-->
+    <blog-card v-for="blog in blogList" :key="blog.blogId" :blog="blog" :tag-color-map="tagColorMap"/>
   </div>
+
+  <!-- 分页 -->
+
 </template>
 
 <script setup lang="ts">
@@ -104,11 +73,11 @@ const loadBlogList = (): void => {
     res.data.map(item => {
       // 修改 tag 形式
       item.tags = item.tags.toString().split(',')
-      let temp = new Date(item.create_time)
+      let temp = new Date(item.createTime)
       // 修改时间
-      item.create_time = `${temp.getFullYear()}-${temp.getMonth()+1}-${temp.getDate()} ${temp.getHours()}:${temp.getMinutes()}:${temp.getSeconds()}`
-      temp = new Date(item.update_time)
-      item.update_time = `${temp.getFullYear()}-${temp.getMonth()+1}-${temp.getDate()} ${temp.getHours()}:${temp.getMinutes()}:${temp.getSeconds()}`
+      item.createTime = `${temp.getFullYear()}-${temp.getMonth()+1}-${temp.getDate()} ${temp.getHours()}:${temp.getMinutes()}:${temp.getSeconds()}`
+      temp = new Date(item.updateTime)
+      item.updateTime = `${temp.getFullYear()}-${temp.getMonth()+1}-${temp.getDate()} ${temp.getHours()}:${temp.getMinutes()}:${temp.getSeconds()}`
     })
     blogList.value = res.data
   })

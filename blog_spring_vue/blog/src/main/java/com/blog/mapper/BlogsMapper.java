@@ -25,7 +25,7 @@ public interface BlogsMapper extends BaseMapper<Blogs> {
                        @Param("pageSize") int pageSize,
                        @Param("pageNum") int pageNum);
 
-    List<Map> getBlogById(@Param("id") int id);
+    List<Map> getBlogById(@Param("id") Long id);
 
     List<Map> getBlogsTime(@Param("format") String format);
 }

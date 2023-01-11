@@ -48,7 +48,7 @@ public class BlogsController {
         if (Objects.equals(parma.getTag(), "")) {
             parma.setTag("%");
         }
-        System.out.println(parma);
+//        System.out.println(parma);
         List<Map> res = blogsService.getBlogs(
                 parma.getTitle(),
                 parma.getTag(),
@@ -60,7 +60,7 @@ public class BlogsController {
 
     // 根据 ID 获取文章详情
     @GetMapping("getBlogById")
-    public Result getBlogById(@RequestParam int id) {
+    public Result getBlogById(@RequestParam Long id) {
 
         List<Map> res = blogsService.getBlogById(id);
 
@@ -74,9 +74,9 @@ public class BlogsController {
     // 获取所有列表 按时间分
     @GetMapping("getBlogsTime")
     public Result getBlogsTime(@RequestParam String format) {
-
+        System.out.println(format);
         List<Map> res = blogsService.getBlogsTime(format);
-
+        System.out.println(res);
         return Result.success(res, getBlogCount(), (long) res.size());
     }
 }

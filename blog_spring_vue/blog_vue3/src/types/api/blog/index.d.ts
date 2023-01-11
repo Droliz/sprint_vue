@@ -1,10 +1,10 @@
 interface blogInfo {
-    blog_id: number,
+    blogId: bigint,
     title: string,
     content: string,
     author: string,
-    create_time: string,
-    update_time: string
+    createTime: string,
+    updateTime: string
 }
 
 interface Blog_tag extends blogInfo {
@@ -23,4 +23,9 @@ interface Query {
         title?: string,
         tag?: string,
     }
+}
+
+interface BlogGroup {
+    key: keyof Blog_tag,
+    blog: Blog_tag[]
 }

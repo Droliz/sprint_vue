@@ -25,13 +25,13 @@ const route = useRoute()
 
 const blogInfo = ref<Blog_tag>({
   author: "",
-  blog_id: -1,
+  blogId: 0n,
   color: "",
   content: "",
-  create_time: "",
+  createTime: "",
   tags: [],
   title: "",
-  update_time: "",
+  updateTime: "",
 })
 
 const content = ref<HTMLElement>()
@@ -48,9 +48,13 @@ onUpdated(() => {
 
 // 加载数据
 const loadBlog = () => {
+
+  console.log(BigInt(route.params.id as string))
+  // console.log(route.params.id)
   // 获取文章
-  getBlog(Number(route.params.id)).then(({data}) => {
-    // console.log(data)
+  getBlog(BigInt(route.params.id as string)).then(({data}) => {
+    console.log(data)
+
     blogInfo.value = data[0]
     parseMarkdown()
   })

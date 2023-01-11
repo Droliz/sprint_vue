@@ -1,8 +1,13 @@
 import axios from 'axios'
+// @ts-ignore
+import JSONbig from 'json-bigint'
 
 const api = axios.create({
     baseURL: 'http://localhost:9999',    // 请求的公共地址部分
-    timeout: 3000   // 请求超时时间 当请求时间超过5秒还未取得结果时 提示用户请求超时
+    timeout: 3000,   // 请求超时时间 当请求时间超过5秒还未取得结果时 提示用户请求超时
+    transformResponse: [function (data) {
+        return JSONbig.parse(data)
+    }]
 })
 
 // interceptors axios的拦截器对象

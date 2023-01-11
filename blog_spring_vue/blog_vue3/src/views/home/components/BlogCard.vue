@@ -1,6 +1,6 @@
 <template>
   <el-card
-      @click="blogPage(blog.blog_id)"
+      @click="blogPage(blog.blogId)"
       shadow="hover"
       class="box-card">
     <template #header>
@@ -26,7 +26,7 @@
           <span>作者：{{ blog.author }}</span>
           <span>点赞</span>
           <span>踩</span>
-          <span>更新时间：{{ blog.update_time }}</span>
+          <span>更新时间：{{ blog.updateTime }}</span>
         </div>
       </div>
     </div>
@@ -43,7 +43,7 @@ const {blog, tagColorMap} = props
 const router = useRouter();
 
 // 跳转 blog 页面
-const blogPage = (blog_id: number): void => {
+const blogPage = (blog_id: bigint): void => {
   router.push({
     name: 'blogPage',
     params: {

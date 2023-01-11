@@ -30,7 +30,7 @@ public class BlogsServiceImpl extends ServiceImpl<BlogsMapper, Blogs> implements
     }
 
     @Override
-    public List<Map> getBlogById(int id) {
+    public List<Map> getBlogById(Long id) {
         return blogsMapper.getBlogById(id);
     }
 
