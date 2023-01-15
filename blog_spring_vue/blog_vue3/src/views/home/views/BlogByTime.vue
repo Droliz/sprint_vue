@@ -21,18 +21,26 @@
           :key="blog.key"
           :timestamp="title==='周度' ? `${blog.key.split('-')[0]} 第 ${blog.key.split('-')[1]} 周` : blog.key"
           placement="top">
-        <blog-card v-for="i in blog.blog" :blog="i" :tag-color-map="tagColorMap"></blog-card>
+        <suspense>
+          <template #default>    <!-- 真正需要显示的 -->
+            <blog-card v-for="i in blog.blog" :blog="i" :tag-color-map="tagColorMap"></blog-card>
+          </template>
+          <template #fallback>    <!-- 还没加载成功显示 -->
+            <el-empty description="加载中" />
+          </template>
+        </suspense>
       </el-timeline-item>
     </el-timeline>
   </div>
 </template>
 
 <script setup lang="ts">
-import BlogCard from '../components/BlogCard.vue'
-import {onMounted, reactive, ref, toRefs} from "vue";
+// import BlogCard from '../components/BlogCard.vue'
+import {onMounted, reactive, ref, toRefs, defineAsyncComponent} from "vue";
 import {getBlogsTime} from "@/api/blog";
 import {getTags} from "@/api/tags";
-
+// 异步组件
+const BlogCard = defineAsyncComponent(() => import("../components/BlogCard.vue"))
 
 const loading = ref<boolean>(true)
 
@@ -82,7 +90,7 @@ const loadBlogs = () => {
           blog.updateTime = `${temp.getFullYear()}-${temp.getMonth()+1}-${temp.getDate()} ${temp.getHours()}:${temp.getMinutes()}:${temp.getSeconds()}`
         }))
 
-    console.log(blogs)
+    // console.log(blogs)
   })
 }
 
