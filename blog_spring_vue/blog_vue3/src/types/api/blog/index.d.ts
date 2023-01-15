@@ -17,8 +17,8 @@ interface resBlogTag extends baseRes {
 }
 
 interface Query {
-    pageSize?: number,
-    pageNum?: number,
+    pageSize: number,
+    pageNum: number,
     parma: {
         title?: string,
         tag?: string,

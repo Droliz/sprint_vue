@@ -19,6 +19,7 @@
 import {useRoute} from "vue-router";
 import {onUpdated, onMounted, ref} from "vue";
 import {getBlog} from "@/api/blog";
+// import {ElNotification} from "element-plus"
 import markdown from "@/utils/markdown/markdown";
 
 const route = useRoute()
@@ -49,11 +50,11 @@ onUpdated(() => {
 // 加载数据
 const loadBlog = () => {
 
-  console.log(BigInt(route.params.id as string))
+  // console.log(BigInt(route.params.id as string))
   // console.log(route.params.id)
   // 获取文章
   getBlog(BigInt(route.params.id as string)).then(({data}) => {
-    console.log(data)
+    // console.log(data)
 
     blogInfo.value = data[0]
     parseMarkdown()
@@ -79,32 +80,8 @@ const copySuccess = (options: {type: string, message: string, title: string}) =>
 
 <style scoped>
 
-/*.markdown-here-wrapper >>> code li,*/
-.markdown-here-wrapper >>> code ol{
-  list-style-type: decimal;
-}
-
-.markdown-here-wrapper >>> pre{
-  position: relative;
-}
-
-.markdown-here-wrapper >>> pre:hover .copy-ico {
-  color: #66d9ef;
-}
-
-.markdown-here-wrapper >>> .copy-ico {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  color: #f7f7f7;
-  cursor: pointer;
-  padding: 3px 5px;
-  border-radius: 2px;
-}
-
-.markdown-here-wrapper >>> .copy-ico:hover {
-  background-color: #777777;
-}
+/* 代码块行号样式、复制 */
+@import '../css/codeLine.css';
 
 .blog-content-body {
   margin: 50px;
@@ -122,15 +99,15 @@ const copySuccess = (options: {type: string, message: string, title: string}) =>
   font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;
 }
 
-.blog-toc >>> a {
+.blog-toc:deep(a) {
   text-decoration: none
 }
 
-.blog-toc >>> a:hover {
+.blog-toc:deep(a:hover) {
   color: #55a532;
 }
 
-.blog-toc >>> a:active {
+.blog-toc:deep(a:active) {
   color: #55a532;
 }
 

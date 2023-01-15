@@ -16,7 +16,7 @@
       <div class="btn-list">
         <ul>
           <li>
-            <el-button @click="handleClickBtn">
+            <el-button @click="homePage">
               <template #icon>
                 <i-ep-house />
               </template>
@@ -45,6 +45,14 @@
                 <i-ep-coffeeCup />
               </template>
               <span>请我喝茶</span>
+            </el-button>
+          </li>
+          <li>
+            <el-button @click="markdownView">
+              <template #icon>
+                <i-ep-editPen />
+              </template>
+              <span>编辑预览</span>
             </el-button>
           </li>
           <li>
@@ -121,6 +129,13 @@ onMounted(() => {
 
 const { titles, tags } = toRefs(data)
 
+// 主页
+const homePage = (): void => {
+  router.push({
+    name: "index"
+  })
+}
+
 // 前往文章分类
 const blogList = (): void => {
   router.push({
@@ -142,9 +157,19 @@ const blogByTime = (): void => {
   })
 }
 
+// markdown预览
+const markdownView = (): void => {
+  router.push({
+    name: 'markdownView'
+  })
+}
+
+
 const handleClickBtn = () => {
 
 }
+
+
 
 </script>
 

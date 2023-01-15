@@ -1,10 +1,13 @@
 package com.blog.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.blog.common.Parma;
 import com.blog.common.QueryPageParma;
 import com.blog.common.Result;
+import com.blog.entity.TagBlog;
 import com.blog.service.BlogsService;
+import com.blog.service.TagBlogService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -27,9 +30,18 @@ public class BlogsController {
     @Resource
     private BlogsService blogsService;
 
+    @Resource
+    private TagBlogService tagBlogService;
+
     // 获取文章总数
     private Long getBlogCount() {
         return (long) blogsService.list().size();
+    }
+
+    // 获取文章的有效数据
+    private Long getBlogSize() {
+        int userCount = tagBlogService.count(new QueryWrapper<TagBlog>().select("DISTINCT blog_id").lambda());
+        return (long) userCount;
     }
 
     // 获取所有博客信息（多表查询）
@@ -55,7 +67,7 @@ public class BlogsController {
                 query.getPageSize(),
                 (query.getPageNum()-1) * query.getPageSize());
 
-        return Result.success(res, getBlogCount(), (long) res.size());
+        return Result.success(res, getBlogCount(), getBlogSize());
     }
 
     // 根据 ID 获取文章详情
@@ -68,7 +80,7 @@ public class BlogsController {
             return Result.fail("没有找到该博客，请联系管理员");
         }
 
-        return Result.success(res, getBlogCount(), 1L);
+        return Result.success(res, getBlogCount(), getBlogSize());
     }
 
     // 获取所有列表 按时间分

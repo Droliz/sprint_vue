@@ -14,22 +14,27 @@
   </el-dropdown>
 
   <!-- 归档 -->
-  <el-timeline class="time-line-body">
-    <el-timeline-item
-        v-for="blog in blogs"
-        :key="blog.key"
-        :timestamp="title==='周度' ? `${blog.key.split('-')[0]} 第 ${blog.key.split('-')[1]} 周` : blog.key"
-        placement="top">
-      <blog-card v-for="i in blog.blog" :blog="i" :tag-color-map="tagColorMap"></blog-card>
-    </el-timeline-item>
-  </el-timeline>
+  <div v-loading="loading">
+    <el-timeline class="time-line-body">
+      <el-timeline-item
+          v-for="blog in blogs"
+          :key="blog.key"
+          :timestamp="title==='周度' ? `${blog.key.split('-')[0]} 第 ${blog.key.split('-')[1]} 周` : blog.key"
+          placement="top">
+        <blog-card v-for="i in blog.blog" :blog="i" :tag-color-map="tagColorMap"></blog-card>
+      </el-timeline-item>
+    </el-timeline>
+  </div>
 </template>
 
 <script setup lang="ts">
 import BlogCard from '../components/BlogCard.vue'
-import {onMounted, reactive, toRefs} from "vue";
+import {onMounted, reactive, ref, toRefs} from "vue";
 import {getBlogsTime} from "@/api/blog";
 import {getTags} from "@/api/tags";
+
+
+const loading = ref<boolean>(true)
 
 onMounted(() => {
   loadBlogs()
@@ -67,6 +72,7 @@ getTags().then(({data}) => {
 
 const loadBlogs = () => {
   getBlogsTime(format.value).then(({data}) => {
+    loading.value = false
     // console.log(data)
     blogs.value = orchesData(data, 'createTime' as keyof Blog_tag)
     blogs.value.forEach(i =>

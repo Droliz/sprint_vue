@@ -16,7 +16,13 @@ const routes: RouteRecordRaw[] = [
                 path: "home",
                 name: "home",
                 component: () => import("@/views/home/HomeView.vue"),
+                redirect: '/home/index',
                 children: [
+                    {
+                        path: "index",
+                        name: "index",
+                        component: () => import("@/views/home/views/HomeMain.vue")
+                    },
                     {
                         path: "blogList",
                         name: "blogList",
@@ -37,7 +43,11 @@ const routes: RouteRecordRaw[] = [
                         name: 'blogByTime',
                         component: () => import("@/views/home/views/BlogByTime.vue")
                     },
-
+                    {
+                        path: 'markdownView',
+                        name: 'markdownView',
+                        component: () => import("@/views/home/views/MarkdownView.vue")
+                    }
                 ]
             }
         ]

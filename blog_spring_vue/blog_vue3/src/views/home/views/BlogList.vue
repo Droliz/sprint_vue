@@ -7,7 +7,7 @@
           <i-ep-refreshRight/>
         </template>
       </el-button>
-      <el-button @click="loadBlogList">搜索</el-button>
+      <el-button @click="search">搜索</el-button>
     </div>
     <div class="search-tags">
       <el-button
@@ -26,7 +26,16 @@
   </div>
 
   <!-- 分页 -->
-
+  <el-pagination
+      hide-on-single-page
+      v-model:current-page="pageNum"
+      v-model:page-size="pageSize"
+      :page-sizes="[10, 20, 50]"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+  />
 </template>
 
 <script setup lang="ts">
@@ -34,7 +43,6 @@ import {reactive, ref, toRefs} from "vue";
 import { getBlogList } from "@/api/blog";
 import { getTags } from "@/api/tags";
 import {useRouter} from "vue-router";
-
 import BlogCard from '../components/BlogCard.vue'
 
 const query = reactive<Query>({
@@ -47,6 +55,8 @@ const query = reactive<Query>({
 })
 
 const { pageNum, pageSize, parma } = toRefs(query)
+
+const total = ref<number>(0)
 
 const data = reactive<{blogList: Blog_tag[], tagColorMap: string[][]}>({
   blogList: [],
@@ -67,8 +77,14 @@ getTags().then(({data}) => {
   loadBlogList()
 })
 
+const search = () => {
+  pageNum.value = 1
+  loadBlogList()
+}
+
 // 加载博客列表数据
 const loadBlogList = (): void => {
+  // pageNum.value = 1
   getBlogList(query).then(res => {
     res.data.map(item => {
       // 修改 tag 形式
@@ -80,6 +96,7 @@ const loadBlogList = (): void => {
       item.updateTime = `${temp.getFullYear()}-${temp.getMonth()+1}-${temp.getDate()} ${temp.getHours()}:${temp.getMinutes()}:${temp.getSeconds()}`
     })
     blogList.value = res.data
+    total.value = res.size
   })
 }
 
@@ -99,6 +116,7 @@ const reset = (): void => {
   isPitchTag.value = ""
   parma.value.title = ""
   parma.value.tag = ""
+  pageNum.value = 1
   // 获取blog数据
   loadBlogList()
 }
@@ -113,6 +131,21 @@ const blogPage = (blog_id: number): void => {
       id: blog_id
     }
   })
+}
+
+// 切换每页的大小
+const handleSizeChange = (val: number) => {
+  pageSize.value = val
+  // 回到第一页
+  pageNum.value = 1
+  // 重新获取
+  loadBlogList()
+}
+
+// 切换页码
+const handleCurrentChange = (val: number) => {
+  pageNum.value = val
+  loadBlogList()
 }
 </script>
 
@@ -147,16 +180,20 @@ const blogPage = (blog_id: number): void => {
   border: none;
 }
 
-.btnPitchTag {
-  color: var(--el-button-hover-text-color);
-  border-color: var(--el-button-hover-border-color);
-  background-color: var(--el-button-hover-bg-color);
-  outline: 0;
-}
+/*.btnPitchTag {*/
+/*  color: var(--el-button-hover-text-color);*/
+/*  border-color: var(--el-button-hover-border-color);*/
+/*  background-color: var(--el-button-hover-bg-color);*/
+/*  outline: 0;*/
+/*}*/
 
 .context-body {
   margin: 50px;
   padding: 0;
+}
+
+.el-pagination {
+  margin: 10px 10px 30px;
 }
 
 /* 自适应 */

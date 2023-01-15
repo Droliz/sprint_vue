@@ -1,0 +1,70 @@
+
+/* 行号样式 */
+.markdown-here-wrapper:deep(code ul),
+.markdown-here-wrapper:deep(code ol){
+    list-style-type: decimal;
+}
+
+/* 复制样式 */
+.markdown-here-wrapper:deep(pre){
+    position: relative;
+}
+
+.markdown-here-wrapper:deep(.code-menu){
+    display: none;
+    transition: all;
+}
+
+.markdown-here-wrapper:deep(pre:hover .copy-ico) {
+    color: #66d9ef;
+}
+
+.markdown-here-wrapper:deep(pre:hover .code-menu) {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #f7f7f7;
+    /*cursor: pointer;*/
+    padding: 3px 5px;
+    border-radius: 2px;
+}
+
+.markdown-here-wrapper:deep(.copy-ico) {
+    cursor: pointer;
+    padding: 3px 5px;
+    border-radius: 2px;
+}
+
+.markdown-here-wrapper:deep(.code-lang) {
+    cursor: default;
+    margin-right: 2px;
+    color: rgb(255 255 255 /40%);
+}
+
+.markdown-here-wrapper:deep(.copy-ico:hover) {
+    background-color: #777777;
+}
+
+.markdown-here-wrapper:deep(.code-main) {
+    overflow-y: auto;
+    border: none;
+}
+
+/*滚动条样式*/
+.markdown-here-wrapper:deep(.code-main::-webkit-scrollbar) {
+    height: 10px;
+}
+
+.markdown-here-wrapper:deep(.code-main::-webkit-scrollbar-thumb) {
+    border-radius: 20px;
+    -webkit-box-shadow: inset 0 0 5px #fff;
+    background: #D8D8D8;
+}
+
+.markdown-here-wrapper:deep(.code-main::-webkit-scrollbar-track) {
+    -webkit-box-shadow: inset 0 0 5px #fff;
+    border-radius: 0;
+    background: #fff;
+}

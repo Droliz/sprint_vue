@@ -1,4 +1,10 @@
 import hljs from "highlight.js";
+// 按需引入语言包
+import xml from 'highlight.js/lib/languages/xml';
+
+// 扩展 vue 为 xml 语法
+hljs.registerLanguage('vue', xml);
+
 import 'highlight.js/styles/atom-one-dark.css' //样式
 import { App } from 'vue'
 // @ts-ignore
@@ -12,12 +18,14 @@ export default function highlight(app:  App<Element>) {
             // blocks.forEach((block)=>{
             //     hljs.highlightBlock(<HTMLElement>block)
             // })
-            // console.log('运行自定义指令', binding.value.once)
-            console.log(binding)
+
             let pres = el.querySelectorAll('pre')
 
             pres.forEach((pre, index) => {
                 let block = pre.querySelectorAll('code')[0]
+
+                let lang = block.classList[0].split('-')[1]
+                block.classList.add("code-main")
                 // 保存代码块
                 let code: string
                 code = block.innerText
@@ -35,7 +43,10 @@ export default function highlight(app:  App<Element>) {
                 // 复制功能
                 if (!pre.querySelector('.copy-ico')) {
 
-                    pre.innerHTML = `<div class="copy-ico ${a}">复制</div>` + pre.innerHTML
+                    pre.innerHTML = `<div class="code-menu">
+                                        <span class="code-lang">${lang}</span>
+                                        <span class="copy-ico ${a}">复制</span>
+                                     </div>` + pre.innerHTML
 
                     let clipboard = new ClipboardJS(
                         `.${a}`,

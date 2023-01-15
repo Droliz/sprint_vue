@@ -80,32 +80,44 @@
 /*  }*/
 /*}*/
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 html {
   scroll-behavior: smooth;  /* 平滑滚动 */
   line-height: 1.8; /*更改默认的行距*/
   word-spacing:2px; /*更改默认的词间距*/
   letter-spacing:2px;/*更改默认的字符间距*/
   font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;
-
 }
 
 .scrolBox {
   max-height: 100px;
+  /*max-width: 100px;*/
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 10px;
 }
 
 /*滚动条样式*/
+
+/* 滚动条整体样式(高宽分别对应横竖滚动条的尺寸) */
 .scrolBox::-webkit-scrollbar {
   width: 10px;
 }
+
+/* 滚动条里面小方块 */
 .scrolBox::-webkit-scrollbar-thumb {
   border-radius: 20px;
   -webkit-box-shadow: inset 0 0 5px #fff;
   background: #D8D8D8;
 }
+
+/* 滚动条里面轨道 */
 .scrolBox::-webkit-scrollbar-track {
+  /*display: none;*/
   -webkit-box-shadow: inset 0 0 5px #fff;
   border-radius: 0;
   background: #fff;
